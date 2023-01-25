@@ -1,17 +1,18 @@
 # get_next_line
-Cette fonction a comme objectif de pouvoir lire une ligne d'un fichier donné. Des appels successifs permet de lire l'intégralité du fichier.
-La fonction doit retourner la ligne lue suivis du retour à la ligne la terminant.
-La fonction doit pouvoir lire jusqu'à BUFFER_SIZE.
-À chaque nouvelle ligne la fonction doit retourner la ligne précèdente. \n
 
+## char *get_next_line(int fd);
 
-La fonction est protoypée de la façon suivante : char *get_next_line(int fd);
-fd : le fichier descripteur pris en paramètre. \n
+### #define BUFFER_SIZE;
 
-Il est possible de se servir des fonctions (read, malloc et free) \n
+### static char *saved; // garde en mémoire les lignes lues
 
-La fonction read() est protoypée de la façon suivante : ssize_t read(int fd, void *buff, size_t nbyte);
-fd      : le fichier descripteur pris en paramètre.
-*buff   : un pointeur vers ou les données lues seront stockées.
-n_byte  : taille maximale à lire.
+### char buf[BUFFER_SIZE + 1]; // array temporaire pour le string lu d’une
+
+### grosseur de BUFFER_SIZE.
+
+**get_next_line** va lire **fd** jusqu’à la grosseur **BUFFER_SIZE** passé en paramètre, et déterminer si le string **saved** donnée par la fonction est bien une ligne (se termine par \n). Si la **saved** n’est pas une ligne, la fonction s’exécutera de nouveau. 
+
+**saved** gardera en mémoire les données lues jusqu’à la fin du programme.
+
+**buf** est un array temporaire pour stocker la chaine lue de la grosseur de **BUFFER_SIZE**. buf sera joint à **saved** string.
 

@@ -6,27 +6,38 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:36 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/23 15:29:10 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:34:12 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*read_saved(int fd, char *saved)
 {
-    static int i;
-    char *stored_line;
+	int		bytes_read;
+	char	*buf;
 
-    i = 0;
-    stored_line = malloc(sizeof(char) * BUFFER_SIZE);
-    int bytes_read = read(fd, stored_line, BUFFER_SIZE);
-    while (stored_line[i] != '\n')
-        i++;
-    return (stored_line);
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	bytes_read = 1;
+	while (!ft_strchr(saved, '\n') && bytes_read != 0)
+	{
+		bytes_read = read(fd, buf, BUFFER_SIZE);
+		buf[bytes_read] = '\0';
+		saved = ft_strjoin(saved, buf);
+	}
+	free(buf);
+	return (saved);
 }
 
-int main()
+char	*get_next_line(int fd)
 {
-    int fd = open("README.md", O_RDONLY);
-    printf("%s", get_next_line(fd));
+	static char *saved;
+    char *line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	saved = read_saved(fd, saved);
+	return (saved);
 }

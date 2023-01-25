@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 14:00:32 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/25 14:15:46 by acouture         ###   ########.fr       */
+/*   Created: 2023/01/25 13:53:42 by acouture          #+#    #+#             */
+/*   Updated: 2023/01/25 14:21:13 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
+#include <stdio.h>
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+int main ()
+{
+    int fd;
 
-# define BUFFER_SIZE 42
-
-char	*ft_strchr(char *str, int c);
-size_t	ft_strlen(char *str);
-char	*ft_strjoin(char *s1, char *s2);
-char	*read_saved(int fd, char *saved);
-char	*get_next_line(int fd);
-
-#endif
+    fd = open("test.txt", O_RDONLY);
+    for (size_t i = 0; i < 3; i++)
+    {
+        printf("%s", get_next_line(fd));
+    }
+}

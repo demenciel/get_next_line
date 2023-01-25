@@ -2,6 +2,7 @@ NAME = 		get_next_line
 
 SRC =		get_next_line_utils.c \
 			get_next_line.c \
+			main.c \
 		
 DEF_COLOR = \033[0;39m
 GREEN = \033[0;92m
