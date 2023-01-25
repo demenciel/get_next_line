@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:56 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/25 14:03:44 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:24:39 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *saved, char *buf)
 {
 	char			*join_str;
 	unsigned int	i;
@@ -50,22 +50,70 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	join_str = malloc(((ft_strlen(s1) + 1) + ft_strlen(s2)) * sizeof(char));
-	if (join_str == NULL)
-		return (NULL);
-	while (s1[i])
+	if (!saved)
 	{
-		join_str[i] = s1[i];
+		saved = (char *)malloc(1 * sizeof(char));
+		saved[0] = '\0';
+	}
+	if (!saved || !buf)
+		return (NULL);
+	join_str = malloc(((ft_strlen(saved) + 1) + ft_strlen(buf)) * sizeof(char));
+	if (!join_str)
+		return (NULL);
+	while (saved[i])
+	{
+		join_str[i] = saved[i];
 		i++;
 	}
-	while (s2[j])
-	{
-		join_str[i] = s2[j];
-		i++;
-		j++;
-	}
+	while (buf[j])
+		join_str[i++] = buf[j++];
 	join_str[i] = '\0';
+	free(saved);
 	return (join_str);
+}
+
+char	*read_new_saved(char *saved)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (saved[i] && saved[i] != '\n')
+		i++;
+	if (!saved[i])
+	{
+		free(saved);
+		return (NULL);
+	}
+	str = (char *)malloc(sizeof(char) * ft_strlen(saved) - i + 1);
+	if (!str)
+		return (NULL);
+	i++;
+	j = 0;
+	while (saved[i])
+		str[j++] = saved[i++];
+	str[j] = '\0';
+	free(saved);
+	return (str);
+}
+
+char	*get_line(char *saved)
+{
+	int i;
+	char *str;
+
+	i = 0;
+	while (saved[i] != '\n' && saved[i])
+		i++;
+	str = (char *)malloc(sizeof(char) * i + 2);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (saved[i] != '\n' && saved[i])
+	{
+		str[i] = saved[i];
+		i++;
+	}
+	return (str);
 }
