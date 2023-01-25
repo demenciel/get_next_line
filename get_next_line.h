@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:32 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/25 16:25:16 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:40:06 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+#ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
+#endif
 
 char	*ft_strchr(char *str, int c);
 size_t	ft_strlen(char *str);
