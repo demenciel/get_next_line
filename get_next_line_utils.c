@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utilisateur <utilisateur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:56 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/25 16:24:39 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:06:42 by utilisateur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,26 @@ char	*ft_strjoin(char *saved, char *buf)
 	return (join_str);
 }
 
+char	*get_line(char *saved)
+{
+	int i;
+	char *str;
+
+	i = 0;
+	while (saved[i] != '\n' && saved[i])
+		i++;
+	str = (char *)malloc(sizeof(char) * i + 2);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (saved[i] != '\n' && saved[i])
+	{
+		str[i] = saved[i];
+		i++;
+	}
+	return (str);
+}
+
 char	*read_new_saved(char *saved)
 {
 	char	*str;
@@ -95,25 +115,5 @@ char	*read_new_saved(char *saved)
 		str[j++] = saved[i++];
 	str[j] = '\0';
 	free(saved);
-	return (str);
-}
-
-char	*get_line(char *saved)
-{
-	int i;
-	char *str;
-
-	i = 0;
-	while (saved[i] != '\n' && saved[i])
-		i++;
-	str = (char *)malloc(sizeof(char) * i + 2);
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (saved[i] != '\n' && saved[i])
-	{
-		str[i] = saved[i];
-		i++;
-	}
 	return (str);
 }
