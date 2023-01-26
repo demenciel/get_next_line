@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:56 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 11:57:37 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:09:49 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,27 +76,24 @@ char	*ft_strjoin(char *saved, char *buf)
 char	*get_line_out(char *saved)
 {
 	int i;
+	int j;
 	char *str;
 
 	i = 0;
+	j = 0;
 	if (!saved[i])
 		return (NULL);
-	while (saved[i] && saved[i] != '\n')
-		++i;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	while (saved[i] != '\0' && saved[i] != '\n')
+		i++;
+	i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
 	while (saved[i] && saved[i] != '\n' )
-	{
-		str[i] = saved[i];
-		i++;
-	}
+		str[j++] = saved[i++];
 	if (saved[i] == '\n')
-	{
-		str[i] = saved[i];
-		i++;
-	}
-	str[i] = '\0';
+		str[j++] = saved[i++];
+	str[j] = '\0';
 	return (str);
 }
