@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:36 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 13:11:10 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:25:44 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char	*read_new_saved(char *saved)
 	j = 0;
 	while (saved[i])
 		str[j++] = saved[i++];
-	free(saved);
 	str[j] = '\0';
+	free(saved);
 	return (str);
 }
 
