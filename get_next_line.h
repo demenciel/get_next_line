@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:32 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 11:57:48 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:51:28 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*read_saved(int fd, char *saved);
 char	*get_next_line(int fd);
 char	*get_line_out(char *saved);
 char	*read_new_saved(char *saved);
+char	*malloc_join(char *saved, char *buf);
 
 #endif

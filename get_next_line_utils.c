@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:56 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 13:09:49 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:52:07 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,19 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
+char	*malloc_join(char *saved, char *buf)
+{
+	char	*str;
+
+	str = malloc((((ft_strlen(saved)) + ft_strlen(buf)) + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	return (str);
+}
+
 char	*ft_strjoin(char *saved, char *buf)
 {
-	char			*join_str;
+	char			*str;
 	unsigned int	i;
 	unsigned int	j;
 
@@ -52,32 +62,29 @@ char	*ft_strjoin(char *saved, char *buf)
 	j = 0;
 	if (!saved)
 	{
-		saved = (char*)malloc(sizeof(char) * 1);
+		saved = (char *)malloc(sizeof(char) * 1);
 		saved[0] = '\0';
 	}
 	if (!saved || !buf)
 		return (NULL);
-	join_str = malloc((((ft_strlen(saved)) + ft_strlen(buf)) + 1) * sizeof(char));
-	if (join_str == NULL)
-		return (NULL);
+	str = malloc_join(saved, buf);
 	while (saved[i])
 	{
-		join_str[i] = saved[i];
+		str[i] = saved[i];
 		i++;
 	}
 	while (buf[j])
-		join_str[i++] = buf[j++];
-	join_str[i] = '\0';
+		str[i++] = buf[j++];
+	str[i] = '\0';
 	free(saved);
-	return (join_str);
+	return (str);
 }
-
 
 char	*get_line_out(char *saved)
 {
-	int i;
-	int j;
-	char *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
 	j = 0;
@@ -90,7 +97,7 @@ char	*get_line_out(char *saved)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (saved[i] && saved[i] != '\n' )
+	while (saved[i] && saved[i] != '\n')
 		str[j++] = saved[i++];
 	if (saved[i] == '\n')
 		str[j++] = saved[i++];
