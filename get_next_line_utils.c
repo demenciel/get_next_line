@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:56 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 11:52:17 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:55:29 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*ft_strjoin(char *saved, char *buf)
 	return (join_str);
 }
 
-char	*get_line_out(char *saved)
+char	*read_new_saved(char *saved)
 {
 	int i;
 	char *str;
@@ -85,17 +85,31 @@ char	*get_line_out(char *saved)
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
+	i++;
+	j = 0;
+	while (saved[i])
+		str[j++] = saved[i++];
+	str[j] = '\0';
+	free(saved);
+	return (str);
+}
+
+char	*get_line(char *saved)
+{
+	int i;
+	char *str;
+
 	i = 0;
-	while (saved[i] && saved[i] != '\n' )
+	while (saved[i] != '\n' && saved[i])
+		i++;
+	str = (char *)malloc(sizeof(char) * i + 2);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (saved[i] != '\n' && saved[i])
 	{
 		str[i] = saved[i];
 		i++;
 	}
-	if (saved[i] == '\n')
-	{
-		str[i] = saved[i];
-		i++;
-	}
-	str[i] = '\0';
 	return (str);
 }
