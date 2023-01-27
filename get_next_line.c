@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: utilisateur <utilisateur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:36 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 13:25:44 by acouture         ###   ########.fr       */
+/*   Updated: 2023/01/26 19:24:38 by utilisateur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*read_saved(int fd, char *saved)
 		if (bytes_read == -1)
 		{
 			free(buf);
+			free(saved);
 			return (NULL);
 		}
 		buf[bytes_read] = '\0';
