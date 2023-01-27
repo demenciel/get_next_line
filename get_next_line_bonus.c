@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 14:00:36 by acouture          #+#    #+#             */
-/*   Updated: 2023/01/26 14:02:26 by acouture         ###   ########.fr       */
+/*   Created: 2023/01/26 14:12:22 by acouture          #+#    #+#             */
+/*   Updated: 2023/01/26 14:28:10 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ char	*read_new_saved(char *saved)
 
 char	*get_next_line(int fd)
 {
-	static char	*saved;
+	static char	*saved[1028];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	saved = read_saved(fd, saved);
-	if (!saved)
+	saved[fd] = read_saved(fd, saved[fd]);
+	if (!saved[fd])
 		return (NULL);
-	line = get_line_out(saved);
-	saved = read_new_saved(saved);
+	line = get_line_out(saved[fd]);
+	saved[fd] = read_new_saved(saved[fd]);
 	return (line);
 }
