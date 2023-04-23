@@ -6,7 +6,7 @@
 #    By: acouture <acouture@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 07:59:44 by acouture          #+#    #+#              #
-#    Updated: 2023/04/21 15:54:57 by acouture         ###   ########.fr        #
+#    Updated: 2023/04/23 12:45:48 by acouture         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,28 +16,32 @@ CFLAGS	:= -g -Wextra -Wall -Werror
 SRCS	:= ./get_next_line.c \
 			./get_next_line_utils.c \
 
-			
-OBJS	:= ${SRCS:.c=.o}
+OBJ_PATH = obj/
+OBJ = ${SRCS:.c=.o}
+OBJS = $(addprefix $(OBJ_PATH), $(OBJ)) 
+
+DEF_COLOR = \033[0;39m
+GREEN = \033[0;92m
+BLUE = \033[0;94m
+CYAN = \033[0;96m
 
 all: $(NAME)
 
-run : all
-	./get_next
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+$(OBJ_PATH)%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME)
-
-debug: $(NAME)
-	@$(CC) -g $(OBJS) -o $(NAME)
+	@echo "$(GREEN)get_next_line was successfully compiled! $(DEF_COLOR)"
 
 clean:
-	@rm -f $(OBJS)
+	@rm -rf $(OBJS) $(OBJ_PATH)
+	@echo "$(BLUE)get_next_line was successfully cleaned! $(DEF_COLOR)"
 	
 fclean: clean
 	@rm -f $(NAME)
+	@echo "$(BLUE)get_next_line was successfully cleaned! $(DEF_COLOR)"
 
 re: clean all
 

@@ -6,12 +6,18 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:36 by acouture          #+#    #+#             */
-/*   Updated: 2023/04/19 14:57:39 by acouture         ###   ########.fr       */
+/*   Updated: 2023/04/23 12:41:10 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/**
+ * @brief Set a memory block to 0
+ * This function sets the first 'n' bytes pointed to by s to zero
+ * @param s Pointer to the memory area to be zeroed
+ * @param n Number of bytes to be zeroed
+ */
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*p;
@@ -23,6 +29,13 @@ void	ft_bzero(void *s, size_t n)
 		*p++ = 0;
 }
 
+/**
+ * @brief This function allocates and zero-initialize an array
+ * This function allocates memory for an array of size 'counts' elements,
+ *		and each of size 'size', and initializes all bytes in the array to zero
+ * @param count The number of elements in the array
+ * @param size The byte size of the elements of the array
+ */
 void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	total_size;
@@ -36,6 +49,15 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
+/**
+ * Reads from a file descriptor and concatenates the read content to a given string.
+ * Continues reading until a newline character is encountered in the saved string
+ * or until the end of the file is reached. Returns the concatenated string.
+ * If an error occurs during reading, frees memory and returns NULL.
+ * @param fd The file descriptor to read from.
+ * @param saved The string to concatenate the read content to.
+ * @return The concatenated string, or NULL if an error occurs.
+*/
 char	*read_saved(int fd, char *saved)
 {
 	int		bytes_read;
@@ -61,6 +83,13 @@ char	*read_saved(int fd, char *saved)
 	return (saved);
 }
 
+/**
+ * Takes a saved string and returns a new string starting from the first character after
+ * the first newline character. If there is no newline character in the saved string,
+ * frees memory and returns NULL. Returns the new string.
+ * @param saved The saved string to create a new string from.
+ * @return The new string, or NULL if there is no newline character in the saved string.
+*/
 char	*read_new_saved(char *saved)
 {
 	char	*str;
@@ -86,6 +115,11 @@ char	*read_new_saved(char *saved)
 	return (str);
 }
 
+/**
+ * @brief This function is meant to read a line from a file descriptor
+ * @param fd A file descriptor
+ * @return The line that was read from the file descriptor
+ */
 char	*get_next_line(int fd)
 {
 	static char	*saved;
@@ -99,10 +133,4 @@ char	*get_next_line(int fd)
 	line = get_line_out(saved);
 	saved = read_new_saved(saved);
 	return (line);
-}
-
-int main()
-{
-	int fd = open("text.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
 }

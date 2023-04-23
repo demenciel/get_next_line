@@ -6,12 +6,17 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:00:56 by acouture          #+#    #+#             */
-/*   Updated: 2023/03/08 08:04:33 by acouture         ###   ########.fr       */
+/*   Updated: 2023/04/23 12:44:17 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/**
+ * @brief Calculates the length of a given string
+ * @param str The string to calculate the length of
+ * @return The length of the given string
+ */
 size_t	ft_strlen(char *str)
 {
 	size_t	len;
@@ -24,6 +29,15 @@ size_t	ft_strlen(char *str)
 	return (len);
 }
 
+/**
+ * Searches for the first occurrence of a character in a given string.
+ * Returns a pointer to the first occurrence of the character in the string,
+ * or NULL if the character is not found.
+ * @param str The string to search in.
+ * @param c The character to search for.
+ * @return A pointer to the first occurrence of the character in the string,
+	or NULL if not found.
+*/
 char	*ft_strchr(char *str, int c)
 {
 	int	i;
@@ -42,6 +56,14 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
+/**
+ * Helper function for ft_strjoin that allocates memory for the new string.
+ * Returns a pointer to the new string, or NULL if memory allocation fails.
+ * @param saved The first string to concatenate.
+ * @param buf The second string to concatenate.
+ * @return A pointer to the newly allocated string,
+	or NULL if memory allocation fails.
+*/
 char	*malloc_join(char *saved, char *buf)
 {
 	char	*str;
@@ -52,6 +74,14 @@ char	*malloc_join(char *saved, char *buf)
 	return (str);
 }
 
+/**
+ * Concatenates two strings and returns a pointer to the newly concatenated string.
+ * Frees the memory allocated for the first string and returns the new string.
+ * Returns NULL if either of the input strings are NULL or if memory allocation fails.
+ * @param saved The first string to concatenate.
+ * @param buf The second string to concatenate.
+ * @return A pointer to the newly concatenated string, or NULL if concatenation or memory allocation fails.
+*/
 char	*ft_strjoin(char *saved, char *buf)
 {
 	char			*str;
@@ -80,6 +110,13 @@ char	*ft_strjoin(char *saved, char *buf)
 	return (str);
 }
 
+/**
+ * Takes a saved string and returns a new string consisting of all the characters before
+ * the first occurrence of a newline character, including the newline character.
+ * Returns NULL if the saved string is empty or if memory allocation fails.
+ * @param saved The saved string to create a new string from.
+ * @return The new string, or NULL if the saved string is empty or if memory allocation fails.
+*/
 char	*get_line_out(char *saved)
 {
 	int		i;
