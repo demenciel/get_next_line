@@ -6,7 +6,7 @@
 #    By: acouture <acouture@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 07:59:44 by acouture          #+#    #+#              #
-#    Updated: 2023/04/23 12:45:48 by acouture         ###   ########.fr        #
+#    Updated: 2023/05/04 13:39:39 by acouture         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@echo "$(BLUE)get_next_line was successfully cleaned! $(DEF_COLOR)"
+
+bonus: 
 
 re: clean all
 
